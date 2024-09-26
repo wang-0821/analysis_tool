@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'kotlin'
 
 apply from: rootProject.file("gradle/dependency.gradle")
 
@@ -22,9 +21,7 @@ idea {
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-reflect"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    api "org.junit.jupiter:junit-jupiter"
+    implementation "org.junit.jupiter:junit-jupiter"
 }
 
 // set encoding
@@ -32,14 +29,6 @@ compileJava {
     sourceCompatibility = "$jvmVersion"
     targetCompatibility = "$jvmVersion"
     options.encoding = "UTF-8"
-}
-
-compileKotlin {
-    sourceCompatibility = "$jvmVersion"
-    targetCompatibility = "$jvmVersion"
-    kotlinOptions {
-        jvmTarget = "$jvmVersion"
-    }
 }
 
 // 配置所有单元测试的任务信息打印到Console

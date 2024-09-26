@@ -2,16 +2,7 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencyManagement {
     dependencies {
-        dependencySet(group: "org.jetbrains.kotlin", version: "$kotlinVersion") {
-            entry "kotlin-reflect"
-            entry "kotlin-stdlib-jdk8"
-        }
-        // kotlin coroutines
-        dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
-
         // junit
         dependency "org.junit.jupiter:junit-jupiter:5.7.1"
-        // kotlin format
-        dependency "com.pinterest:ktlint:0.40.0"
     }
 }
