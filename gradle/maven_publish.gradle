@@ -1,0 +1,46 @@
+apply plugin: 'maven-publish'
+
+// 生成source源码包
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc.destinationDir
+    classifier "javadoc"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId "com.xiao"
+            if (project.hasProperty("projectGroup")) {
+                groupId property("projectGroup")
+            }
+
+            def publishingSubVersion = System.getenv("PUBLISHING_SUB_VERSION")
+            if (publishingSubVersion == null || publishingSubVersion.isBlank()) {
+                version "$projectVersion" + ".0-SNAPSHOT"
+            } else {
+                version "$projectVersion" + "." + publishingSubVersion
+            }
+
+            from components.java
+            artifact sourceJar
+            artifact javadocJar
+        }
+    }
+
+    repositories {
+        maven {
+            name "GithubPackages"
+            url "$gradleRepoUrl"
+
+            credentials {
+                username = System.getenv("PACKAGE_REPO_USERNAME")
+                password = System.getenv("PACKAGE_REPO_TOKEN")
+            }
+        }
+    }
+}

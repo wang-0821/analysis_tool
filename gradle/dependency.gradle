@@ -1,0 +1,75 @@
+apply plugin: 'io.spring.dependency-management'
+
+dependencyManagement {
+    dependencies {
+        dependencySet(group: "org.jetbrains.kotlin", version: "$kotlinVersion") {
+            entry "kotlin-reflect"
+            entry "kotlin-stdlib-jdk8"
+        }
+        // kotlin coroutines
+        dependency "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+
+        // tools
+        dependency "com.fasterxml.jackson.core:jackson-databind:2.12.4"
+        dependency "joda-time:joda-time:2.10.10"
+        dependency "com.github.ben-manes.caffeine:caffeine:3.0.0"
+        dependency "org.apache.commons:commons-lang3:3.12.0"
+        dependency "jakarta.servlet:jakarta.servlet-api:4.0.4"
+
+        // logging
+        dependency "org.slf4j:slf4j-api:1.7.30"
+        dependency "com.lmax:disruptor:3.4.2"
+        dependencySet(group: "org.apache.logging.log4j", version: "2.13.3") {
+            entry "log4j-core"
+            entry "log4j-slf4j-impl"
+        }
+
+        // junit
+        dependency "org.junit.jupiter:junit-jupiter:5.7.1"
+        // kotlin format
+        dependency "com.pinterest:ktlint:0.40.0"
+
+        // database
+        dependency "org.mybatis:mybatis:3.5.7"
+        dependency "org.mybatis:mybatis-spring:2.0.6"
+        dependency "org.flywaydb:flyway-core:$flywayVersion"
+        dependency "mysql:mysql-connector-java:8.0.21"
+        dependency "com.zaxxer:HikariCP:3.4.5"
+
+        // netty
+        dependencySet(group: "io.netty", version: "4.1.66.Final") {
+            entry "netty-handler"
+            entry "netty-buffer"
+            entry "netty-transport-native-epoll"
+            entry "netty-transport-native-kqueue"
+        }
+
+        //redis
+        dependency "io.lettuce:lettuce-core:6.0.2.RELEASE"
+
+        //spring boot
+        dependencySet(group: "org.springframework.boot", version: "2.5.4") {
+            entry "spring-boot-starter"
+            entry "spring-boot-starter-test"
+            entry "spring-boot-starter-undertow"
+        }
+        // spring framework
+        dependencySet(group: "org.springframework", version: "5.3.9") {
+            entry "spring-jdbc"
+            entry "spring-webmvc"
+        }
+
+        // spring boot admin
+        dependencySet(group: "de.codecentric", version: "2.5.1") {
+            entry "spring-boot-admin-starter-server"
+            entry "spring-boot-admin-starter-client"
+        }
+        dependency "org.jolokia:jolokia-core:1.7.0"
+
+        // cloud
+        dependencySet(group: "com.alibaba.csp", version: "1.8.6") {
+            entry "sentinel-core"
+            entry "sentinel-transport-simple-http"
+        }
+    }
+}

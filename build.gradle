@@ -1,0 +1,26 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+		classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+		classpath "io.spring.gradle:dependency-management-plugin:$dependencyManagementVersion"
+	}
+}
+
+allprojects {
+	group "$projectGroup"
+	version "$projectVersion"
+}
+
+// 子模块通用配置
+subprojects {
+	apply from: rootProject.file("gradle/project_dependency.gradle")
+}
+
+// 执行自定义gradle wrapper task 自动生成gradlew脚本及配置，这里指定下载的Gradle版本
+task gradleWrapper(type: Wrapper) {
+	gradleVersion = "$gradleVersion"
+}
